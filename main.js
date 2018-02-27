@@ -4,7 +4,7 @@ const readline = require('readline');
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
-    prompt: 'quiz> '
+    prompt: 'OHAI> '
 });
 
 rl.prompt();
@@ -120,7 +120,7 @@ const editCmd = id => {
 };
 
 const creditsCmd = () => {
-    console.log('Autores de la práctica:');
+    //console.log('Autores de la práctica:');
     console.log('MARTIN');
     rl.prompt();
 };
