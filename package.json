@@ -4,13 +4,14 @@
   "description": "Practica 2 de CORE",
   "main": "main.js",
   "scripts": {
+    "start": "node main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/martingoldthen/P2_Quiz.git"
   },
-  "author": "martingoldthen",
+  "author": "Martin Gonzalez Calvo",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/martingoldthen/P2_Quiz/issues"
