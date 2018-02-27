@@ -8,60 +8,117 @@ const rl = readline.createInterface({
 rl.prompt();
 
 rl.on('line', (line) => {
-    switch (line.trim()) {
+
+    let args = line.split("");
+    let cmd = args[0].toLowerCase().trim();
+
+    switch (cmd) {
         case '':
+            rl.prompt();
             break;
         case 'help':
         case 'h':
-            console.log('Comandos:');
-            console.log('   h|help - Muestra esta ayuda.');
-            console.log('   list - Listar los quizzes existentes');
-            console.log('   show <id> - Muestra la pregunta y la respuesta del quiz indicado');
-            console.log('   add - Añadir un nuevo quiz interactivamente.');
-            console.log('   delete <id> - Borrar el quiz indicado.');
-            console.log('   edit <id> - Editar el quiz indicado');
-            console.log('   test <id> - Probar el quiz indicado');
-            console.log('   p|play - Jugar a preguntar aleatoriamente todos los quizes');
-            console.log('   credits - Creditos');
-            console.log('   q|quiz - Salir del programa.');
+            helpCmd();
             break;
         case 'quit':
         case 'q':
-            rl.close();
+            quitCmd();
             break;
         case 'add':
-            console.log('añadir un nuevo quiz.');
+            addCmd();
             break;
         case 'list':
-            console.log('Listar todos los quizes existentes');
+            listCmd();
             break;
         case 'show':
-            console.log('Muestra el quiz indicado');
+            showCmd(args[1]);
             break;
         case 'test':
-            console.log('Probar el quiz indicado');
+            testCmd(args[1]);
             break;
         case 'play':
         case 'p':
-            console.log('Jugar');
+            playCmd();
             break;
         case 'delete':
-            console.log('Borrar el quiz indicado');
+            deleteCmd(args[1]);
             break;
         case 'edit':
-            console.log('Editar el quiz indicado');
+            editCmd(args[1]);
             break;
         case 'credits':
-            console.log('Autores de la práctica:');
-            console.log('Martin Gonzalez Calvo');
+            creditsCmd();
             break;
         default:
-            console.log(`Comando desconocido: '${line.trim()}'`);
+            console.log(`Comando desconocido: '${cmd}'`);
             console.log('Use el comando "help" para ver todos los comandos disponibles');
+            rl.prompt();
             break;
     }
-    rl.prompt();
+
 }).on('close', () => {
     console.log('Hasta luego MariCarmen');
     process.exit(0);
 });
+
+
+const helpCmd = () => {
+    console.log('Comandos:');
+    console.log('   h|help - Muestra esta ayuda.');
+    console.log('   list - Listar los quizzes existentes');
+    console.log('   show <id> - Muestra la pregunta y la respuesta del quiz indicado');
+    console.log('   add - Añadir un nuevo quiz interactivamente.');
+    console.log('   delete <id> - Borrar el quiz indicado.');
+    console.log('   edit <id> - Editar el quiz indicado');
+    console.log('   test <id> - Probar el quiz indicado');
+    console.log('   p|play - Jugar a preguntar aleatoriamente todos los quizes');
+    console.log('   credits - Creditos');
+    console.log('   q|quiz - Salir del programa.');
+    rl.prompt();
+};
+
+const addCmd = () => {
+    console.log('añadir un nuevo quiz.');
+    rl.prompt();
+};
+
+const listCmd = () => {
+    console.log('Listar todos los quizes existentes');
+    rl.prompt();
+};
+
+const showCmd = id => {
+    console.log('Muestra el quiz indicado');
+    rl.prompt();
+};
+
+const playCmd = () => {
+    console.log('Jugar');
+    rl.prompt();
+};
+
+const quitCmd = () => {
+    rl.close();
+    rl.prompt();
+};
+
+const testCmd = id => {
+    console.log('Probar el quiz indicado');
+    rl.prompt();
+};
+
+const deleteCmd = id => {
+    console.log('Borrar el quiz indicado');
+    rl.prompt();
+};
+
+const editCmd = id => {
+    console.log('Editar el quiz indicado');
+    rl.prompt();
+};
+
+const creditsCmd = () => {
+    console.log('Autores de la práctica:');
+    console.log('Martin Gonzalez Calvo');
+    rl.prompt();
+};
