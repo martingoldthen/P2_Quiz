@@ -1,3 +1,5 @@
+"use strict";
+
 const readline = require('readline');
 const rl = readline.createInterface({
     input: process.stdin,
@@ -119,6 +121,6 @@ const editCmd = id => {
 
 const creditsCmd = () => {
     console.log('Autores de la práctica:');
-    console.log('Martin Gonzalez Calvo');
+    console.log('MARTIN');
     rl.prompt();
 };
