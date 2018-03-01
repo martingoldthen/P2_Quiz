@@ -4,9 +4,9 @@ const readline = require('readline');
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
-    prompt: 'OHAI> '
 });
 
+rl.setPrompt("quiz>  ");
 rl.prompt();
 
 rl.on('line', (line) => {
