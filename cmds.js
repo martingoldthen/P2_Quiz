@@ -121,14 +121,29 @@ exports.editCmd = (rl, id) => {
  * @param rl Objeto readline usado para implementar el CLI
  */
 exports.testCmd = (rl, id) => {
-    log('Esta mierda no hace nada todavia');
-    rl.prompt();
- /*  if id undefined
+    if (typeof id === "undefined") {
+        errorlog(`Falta el parametro id`);
+        rl.prompt();
+    } else {
+        try {
+            const quiz = model.getByIndex(id);
+            rl.question(colorize(quiz.question + "\n", 'red'), answer => {
+                if (answer === quiz.answer) {
+                    biglog('CORRECTO', 'green');
+                    rl.prompt();
+                } else if(answer !== quiz.answer) {
+                    biglog('INCORRECTO', 'red');
+                    rl.prompt();
+                }
+            });
+        } catch (error) {
+            errorlog(error.message);
+            rl.prompt();
+        }
+    }
+};
 
-       rl.prompt();
-    else
-
-        try
+/*
                 quiz = model...blabla
     ahora queremos preguntar
     rl.question quiz.q resp => {
@@ -138,7 +153,7 @@ exports.testCmd = (rl, id) => {
     }
         catch
             rl.prompt();*/
-};
+
 
 /**
  * Pregunta los quizzes existentes aleatoriamente
