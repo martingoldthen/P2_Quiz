@@ -116,13 +116,27 @@ exports.editCmd = (rl, id) => {
 
 /**
  * Prueba un quiz, hace una pregunta del modelo
+ * rl.question es asincrona!!!!
  * @param id Clave del quiz a probar
  * @param rl Objeto readline usado para implementar el CLI
  */
-exports.testCmd = (rl, id) => {
-    log('Probar el quiz indicado');
-    rl.prompt();
-};
+/*exports.testCmd = (rl, id) => {
+   if id undefined
+
+       rl.prompt();
+    else
+
+        try
+                quiz = model...blabla
+    ahora queremos preguntar
+    rl.question quiz.q resp => {
+
+       resp === quiz.answer CORRECTO INCORRECTO
+        rl.prompt();
+    }
+        catch
+            rl.prompt();
+};*/
 
 /**
  * Pregunta los quizzes existentes aleatoriamente
