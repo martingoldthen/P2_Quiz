@@ -127,7 +127,7 @@ exports.testCmd = (rl, id) => {
     } else {
         try {
             const quiz = model.getByIndex(id);
-            rl.question(colorize(`${quiz.question}` + "\n", 'red'), answer => {
+            rl.question(colorize(quiz.question + "\n", 'red'), answer => {
                 if (answer.trim().toLowerCase() === quiz.answer.toLowerCase()) {
                     log("Su respuesta es");
                     biglog('CORRECTA', 'green');
@@ -145,26 +145,40 @@ exports.testCmd = (rl, id) => {
     }
 };
 
-/*
-                quiz = model...blabla
-    ahora queremos preguntar
-    rl.question quiz.q resp => {
-
-       resp === quiz.answer CORRECTO INCORRECTO
-        rl.prompt();
-    }
-        catch
-            rl.prompt();*/
-
-
 /**
  * Pregunta los quizzes existentes aleatoriamente
  * Se gana si se contesta a todos correctamente
  * @param rl Objeto readline usado para implementar el CLI
  */
 exports.playCmd = rl => {
-    log('Jugar');
-    rl.prompt();
+    let score = 0;
+    let toBeResolved = model.getAll();
+    const playOne = () => {
+        if (toBeResolved.length === 0) {
+            log(`CORRECTO - Lleva ${score} aciertos`);
+            log("No hay nada más que preguntar.");
+            log("Fin del examen. Aciertos:");
+            biglog(`${score}`, 'magenta');
+            rl.prompt();
+        } else {
+            let id = (Math.floor((Math.random() * (toBeResolved.length))));
+            const quiz = model.getByIndex(id);
+            rl.question(colorize(quiz.question + "\n", 'red'), answer => {
+                if (answer.trim().toLowerCase() === quiz.answer.toLowerCase()) {
+                    score++;
+                    log(`Correcto - Lleva ${score} aciertos`);
+                    toBeResolved.splice(id, 1);
+                    playOne();
+                } else if (answer.trim().toLowerCase() !== quiz.answer.toLowerCase()) {
+                    log("INCORRECTO.");
+                    log("Fin del examnen. Aciertos:");
+                    biglog(`${score}`, 'magenta');
+                    rl.prompt();
+                }
+            });
+        }
+    };
+    playOne();
 };
 
 
