@@ -26,7 +26,9 @@ exports.helpCmd = rl => {
  * @param rl Objeto readline usado para implementar el CLI
  */
 exports.listCmd = rl => {
-    log('Listar todos los quizes existentes');
+    model.getAll().forEach((quiz, id) =>{
+       log(`[${colorize(id, 'magenta')}]: ${quiz.question}`)
+    });
     rl.prompt();
 };
 
@@ -36,7 +38,16 @@ exports.listCmd = rl => {
  * @param id ID del quiz a mostrar
  */
 exports.showCmd = (rl, id) => {
-    log('Muestra el quiz indicado');
+    if(typeof id=== "undefined"){
+        errorlog('Falta el parametro id');
+    } else{
+        try{
+            const quiz = model.getByIndex(id);
+            log(`[${colorize(id, 'magenta')}]: ${quiz.question} ${colorize('=>', 'magenta')} ${quiz.answer}`);
+        }catch(error){
+            errorlog(error.message);
+        }
+    }
     rl.prompt();
 };
 
@@ -45,8 +56,14 @@ exports.showCmd = (rl, id) => {
  * Pregunta interactivamente por la pregunta y la respuesta
  * @param rl Objeto readline usado para implementar el CLI
  */
-exports.addCmd = rl => {
-    log('añadir un nuevo quiz.');
+exports.addCmd = rl => {                               //question es una funcion callback
+    rl.question(colorize(' Introduzca una pregunta: ', 'red'), question => {
+        rl.question(colorize(' Introduzca la respuesta ', 'red'), answer => {
+            model.add(question,answer);
+            log(` ${colorize('Se ha añadido', 'magenta')}:\n ${question} ${colorize('=>','magenta')} ${answer}`);
+        })
+    });
+
     rl.prompt();
 };
 
@@ -56,7 +73,15 @@ exports.addCmd = rl => {
  * @param rl Objeto readline usado para implementar el CLI
  */
 exports.deleteCmd = (rl, id) => {
-    log('Borrar el quiz indicado');
+    if(typeof id === "undefined"){
+        errorlog('Falta el parametro id');
+    } else{
+        try{
+            model.deleteByIndex(id);
+        }catch(error){
+            errorlog(error.message);
+        }
+    }
     rl.prompt();
 };
 
@@ -66,8 +91,26 @@ exports.deleteCmd = (rl, id) => {
  * @param rl Objeto readline usado para implementar el CLI
  */
 exports.editCmd = (rl, id) => {
-    log('Editar el quiz indicado');
-    rl.prompt();
+    if(typeof id === "undefined"){
+        errorlog(`Falta el parametro id`);
+        rl.prompt();
+    }else{
+        try {
+            const quiz = model.getByIndex(id);
+            process.stdout.isTTY && setTimeout(() => {rl.write(quiz.question)},0);
+            rl.question(colorize(' Introduzca una pregunta: ', 'red'), question => {
+                process.stdout.isTTY && setTimeout(() => {rl.write(quiz.answer)},0);
+                rl.question(colorize(' Introduzca la respuesta ', 'red'), answer => {
+                    model.update(id, question, answer);
+                    log(`Se ha cambiado el quiz ${colorize(id, 'magenta')} por: ${question} ${colorize('=>', 'magenta')} ${answer}`);
+                    rl.prompt();
+                });
+            });
+        }catch (error){
+        errorlog(error.message);
+        rl.prompt();
+        }
+    }
 };
 
 
