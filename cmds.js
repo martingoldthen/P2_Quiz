@@ -6,7 +6,7 @@ const {log, biglog, colorize, errorlog} = require('./out');
  * Muestra la ayuda
  * @param rl Objeto readline usado para implementar el CLI
  */
-const helpCmd = rl => {
+exports.helpCmd = rl => {
     log('Comandos:');
     log('   h|help - Muestra esta ayuda.');
     log('   list - Listar los quizzes existentes');
@@ -25,20 +25,17 @@ const helpCmd = rl => {
  * Lista todos los quizzes existentes en el modelo
  * @param rl Objeto readline usado para implementar el CLI
  */
-const listCmd = rl => {
+exports.listCmd = rl => {
     log('Listar todos los quizes existentes');
     rl.prompt();
 };
-
-
-
 
 /**
  * Muestra el quiz indicado en el parametro (pregunta y respuesta)
  * @param rl Objeto readline usado para implementar el CLI
  * @param id ID del quiz a mostrar
  */
-const showCmd = (rl, id) => {
+exports.showCmd = (rl, id) => {
     log('Muestra el quiz indicado');
     rl.prompt();
 };
@@ -48,7 +45,7 @@ const showCmd = (rl, id) => {
  * Pregunta interactivamente por la pregunta y la respuesta
  * @param rl Objeto readline usado para implementar el CLI
  */
-const addCmd = rl => {
+exports.addCmd = rl => {
     log('añadir un nuevo quiz.');
     rl.prompt();
 };
@@ -58,7 +55,7 @@ const addCmd = rl => {
  * @param id Clave del quiz a borrar en el modelo
  * @param rl Objeto readline usado para implementar el CLI
  */
-const deleteCmd = (rl, id) => {
+exports.deleteCmd = (rl, id) => {
     log('Borrar el quiz indicado');
     rl.prompt();
 };
@@ -68,7 +65,7 @@ const deleteCmd = (rl, id) => {
  * @param id Clave del quiz a editar en el modelo
  * @param rl Objeto readline usado para implementar el CLI
  */
-editCmd = (rl, id) => {
+exports.editCmd = (rl, id) => {
     log('Editar el quiz indicado');
     rl.prompt();
 };
@@ -79,7 +76,7 @@ editCmd = (rl, id) => {
  * @param id Clave del quiz a probar
  * @param rl Objeto readline usado para implementar el CLI
  */
-const testCmd = (rl, id) => {
+exports.testCmd = (rl, id) => {
     log('Probar el quiz indicado');
     rl.prompt();
 };
@@ -89,7 +86,7 @@ const testCmd = (rl, id) => {
  * Se gana si se contesta a todos correctamente
  * @param rl Objeto readline usado para implementar el CLI
  */
-const playCmd = rl => {
+exports.playCmd = rl => {
     log('Jugar');
     rl.prompt();
 };
@@ -101,7 +98,7 @@ const playCmd = rl => {
  *  @param rl Objeto readline usado para implementar el CLI
  */
 
-const creditsCmd = rl => {
+exports.creditsCmd = rl => {
     log('MARTIN');
     rl.prompt();
 };
@@ -111,19 +108,7 @@ const creditsCmd = rl => {
  * Termina el programa
  * @param rl Objeto readline usado para implementar el CLI
  */
-const quitCmd = rl => {
+exports.quitCmd = rl => {
     rl.close();
 };
 
-exports = module.exports = {
-    helpCmd,
-    addCmd,
-    listCmd,
-    showCmd,
-    playCmd,
-    testCmd,
-    deleteCmd,
-    editCmd,
-    creditsCmd,
-    quitCmd
-};

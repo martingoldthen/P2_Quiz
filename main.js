@@ -1,7 +1,7 @@
 const readline = require('readline');
-//Haciendo esto nos evitamos el out.log y podemos
-//poner directamente el nombre de la funcion
+
 const {log, biglog, colorize, errorlog} = require('./out');
+
 const cmds = require('./cmds');
 
 //Mensaje inicial

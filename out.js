@@ -8,7 +8,7 @@ const chalk = require('chalk');
  * @param color El color que se le quiere dar
  * @returns {string} Devueve el string con el color indicado
  */
-exports.colorize = (msg, color) => {
+const colorize = (msg, color) => {
     if (typeof color !== "undefined"){
         msg = chalk[color].bold(msg);
     }
@@ -21,7 +21,7 @@ exports.colorize = (msg, color) => {
  * @param msg El string a escribir
  * @param color Color del texto
  */
-exports.log = (msg, color) => {
+const log = (msg, color) => {
     console.log(colorize(msg, color));
 };
 
@@ -31,7 +31,7 @@ exports.log = (msg, color) => {
  * @param msg El string a escribir
  * @param color Color del texto
  */
-exports.biglog = (msg, color) => {
+const biglog = (msg, color) => {
     log(figlet.textSync(msg, {horizontalLayout: 'full'}), color);
 };
 
@@ -40,18 +40,14 @@ exports.biglog = (msg, color) => {
  *
  * @param emsg Texto del mensaje de error
  */
-exports.errorlog = (emsg) => {
+const errorlog = (emsg) => {
     console.log(`${colorize("Error", "red")}: ${colorize(colorize(emsg, "red"), "bgYellowBright")}`);
 };
 
-/*
-También podriamos hacer lo siguiente:
+
     exports = module.exports = {
         colorize,
         log,
         biglog,
         errorlog
         };
-
-Y dejar las funciones como const namefunction = ...
- */
