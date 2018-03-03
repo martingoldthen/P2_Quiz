@@ -128,11 +128,11 @@ exports.testCmd = (rl, id) => {
         try {
             const quiz = model.getByIndex(id);
             rl.question(colorize(quiz.question + "\n", 'red'), answer => {
-                if (answer === quiz.answer) {
+                if (answer.trim().toLowerCase() === quiz.answer.toLowerCase()) {
                     log("Su respuesta es");
                     biglog('CORRECTA', 'green');
                     rl.prompt();
-                } else if(answer !== quiz.answer) {
+                } else if(answer.trim().toLowerCase() !== quiz.answer.toLowerCase()) {
                     log("Su respuesta es");
                     biglog('INCORRECTA', 'red');
                     rl.prompt();
