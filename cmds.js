@@ -120,8 +120,10 @@ exports.editCmd = (rl, id) => {
  * @param id Clave del quiz a probar
  * @param rl Objeto readline usado para implementar el CLI
  */
-/*exports.testCmd = (rl, id) => {
-   if id undefined
+exports.testCmd = (rl, id) => {
+    log('Esta mierda no hace nada todavia');
+    rl.prompt();
+ /*  if id undefined
 
        rl.prompt();
     else
@@ -135,8 +137,8 @@ exports.editCmd = (rl, id) => {
         rl.prompt();
     }
         catch
-            rl.prompt();
-};*/
+            rl.prompt();*/
+};
 
 /**
  * Pregunta los quizzes existentes aleatoriamente
